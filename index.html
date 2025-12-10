@@ -1,11 +1,331 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Engineer Atif - CAD Portfolio</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <title>Engineer Atif - CAD Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #0f172a;
+      color: #e5e7eb;
+      min-height: 100vh;
+    }
+
+    header {
+      padding: 24px 16px;
+      text-align: center;
+      background: #020617;
+      border-bottom: 1px solid #1f2937;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      margin-bottom: 4px;
+    }
+
+    header p {
+      font-size: 0.95rem;
+      color: #9ca3af;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px 16px 48px;
+    }
+
+    .intro {
+      margin-bottom: 24px;
+      font-size: 0.95rem;
+      color: #9ca3af;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      background: #020617;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #1f2937;
+      box-shadow: 0 10px 25px rgba(15,23,42,0.6);
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 30px rgba(15,23,42,0.8);
+      border-color: #4b5563;
+    }
+
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .card-body {
+      padding: 12px 14px 14px;
+    }
+
+    .card-title {
+      font-size: 1rem;
+      margin-bottom: 4px;
+    }
+
+    .card-sub {
+      font-size: 0.8rem;
+      color: #9ca3af;
+    }
+
+    footer {
+      text-align: center;
+      padding: 16px;
+      font-size: 0.8rem;
+      color: #6b7280;
+      border-top: 1px solid #1f2937;
+      background: #020617;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15,23,42,0.85);
+      justify-content: center;
+      align-items: center;
+      padding: 16px;
+      z-index: 50;
+    }
+
+    .modal.open {
+      display: flex;
+    }
+
+    .modal-content {
+      background: #020617;
+      border-radius: 16px;
+      max-width: 800px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      border: 1px solid #1f2937;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.7);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 18px;
+      border-bottom: 1px solid #1f2937;
+    }
+
+    .modal-title {
+      font-size: 1.1rem;
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      color: #9ca3af;
+      font-size: 1.4rem;
+      cursor: pointer;
+    }
+
+    .close-btn:hover {
+      color: #f9fafb;
+    }
+
+    .modal-body {
+      padding: 14px 18px 18px;
+      font-size: 0.95rem;
+      color: #d1d5db;
+    }
+
+    .modal-body img {
+      width: 100%;
+      border-radius: 12px;
+      margin-bottom: 12px;
+      border: 1px solid #111827;
+    }
+
+    .meta {
+      font-size: 0.8rem;
+      color: #9ca3af;
+      margin-bottom: 8px;
+    }
+
+    .tags {
+      margin-top: 8px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .tag {
+      font-size: 0.8rem;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid #374151;
+      background: #020617;
+      color: #e5e7eb;
+    }
+
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
 </head>
 <body>
-    <h1>Hello, this is Engineer Atif’s CAD Portfolio</h1>
-    <p>If you see this text, your website is working!</p>
+
+  <header>
+    <h1>Engineer Atif</h1>
+    <p>CAD Designer · 3D Modelling · Product & Mechanical Design</p>
+  </header>
+
+  <main>
+    <p class="intro">
+      Selected CAD projects showcasing 3D modelling, assemblies, and technical visualization.
+      Click any project card to see more details.
+    </p>
+
+    <section class="grid">
+      <!-- PROJECT 1 CARD -->
+      <article class="card" onclick="openModal('project1')">
+        <img src="project1.jpg" alt="Project 1 preview">
+        <div class="card-body">
+          <h2 class="card-title">Engine Assembly</h2>
+          <p class="card-sub">Multi-component 3D engine model</p>
+        </div>
+      </article>
+
+      <!-- PROJECT 2 CARD -->
+      <article class="card" onclick="openModal('project2')">
+        <img src="project2.jpg" alt="Project 2 preview">
+        <div class="card-body">
+          <h2 class="card-title">Gearbox Design</h2>
+          <p class="card-sub">Precision gear train and housing</p>
+        </div>
+      </article>
+
+      <!-- PROJECT 3 CARD -->
+      <article class="card" onclick="openModal('project3')">
+        <img src="project3.jpg" alt="Project 3 preview">
+        <div class="card-body">
+          <h2 class="card-title">Industrial Bracket</h2>
+          <p class="card-sub">Sheet-metal part with reinforcement</p>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> Engineer Atif · CAD Portfolio
+  </footer>
+
+  <!-- MODAL: PROJECT 1 -->
+  <div id="project1" class="modal" onclick="backdropClick(event, 'project1')">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Engine Assembly</h3>
+        <button class="close-btn" onclick="closeModal('project1')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <img src="project1.jpg" alt="Engine assembly CAD render">
+        <p class="meta">Software: SolidWorks · Focus: Assembly design, exploded views</p>
+        <p>
+          Detailed 3D assembly of an internal combustion engine including crankshaft,
+          pistons, connecting rods, and housing. Designed for visualization of motion
+          and interference checks between components.
+        </p>
+        <div class="tags">
+          <span class="tag">Assembly</span>
+          <span class="tag">Exploded View</span>
+          <span class="tag">Mechanical</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: PROJECT 2 -->
+  <div id="project2" class="modal" onclick="backdropClick(event, 'project2')">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Gearbox Design</h3>
+        <button class="close-btn" onclick="closeModal('project2')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <img src="project2.jpg" alt="Gearbox CAD render">
+        <p class="meta">Software: SolidWorks / Inventor · Focus: Gear train, casing design</p>
+        <p>
+          Compact gearbox featuring multiple spur gears and a custom housing.
+          Designed with attention to proper clearances, alignment, and manufacturability.
+        </p>
+        <div class="tags">
+          <span class="tag">Gears</span>
+          <span class="tag">Transmission</span>
+          <span class="tag">Mechanical Design</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: PROJECT 3 -->
+  <div id="project3" class="modal" onclick="backdropClick(event, 'project3')">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Industrial Bracket</h3>
+        <button class="close-btn" onclick="closeModal('project3')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <img src="project3.jpg" alt="Bracket CAD render">
+        <p class="meta">Software: SolidWorks · Focus: Sheet-metal, FEA-ready geometry</p>
+        <p>
+          Structural bracket with bends and fillets optimized for strength and easy fabrication.
+          Designed to be ready for finite element analysis and production.
+        </p>
+        <div class="tags">
+          <span class="tag">Sheet Metal</span>
+          <span class="tag">Bracket</span>
+          <span class="tag">FEA Ready</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Dynamic year in footer
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    function openModal(id) {
+      document.getElementById(id).classList.add("open");
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.remove("open");
+    }
+
+    function backdropClick(event, id) {
+      if (event.target.id === id) {
+        closeModal(id);
+      }
+    }
+  </script>
 </body>
 </html>
