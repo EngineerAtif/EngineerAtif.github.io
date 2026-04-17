@@ -26,20 +26,19 @@ mainSections = ["posts"]
   showScrollToTop = true
 
 [homepage]
-  layout = "background" # This makes your name appear over a full-screen image/animation
-  homepageImage = "img/hero-bg.jpg" # We will upload this image next
+  layout = "background"
+  homepageImage = "img/hero-bg.jpg"
   showRecent = true
   showRecentItems = 6
   showMoreLink = true
-  cardView = true # This turns those boring text links into beautiful moving cards
-  layoutBackgroundBlur = true 
+  cardView = true
+  layoutBackgroundBlur = true
 
 [header]
-  layout = "fixed" # The menu stays at the top with a glass-blur effect when you scroll
+  layout = "fixed"
 
 [appearance]
-  enableApperanceEffects = true # This makes your projects "fade in" smoothly as you scroll
-
+  enableApperanceEffects = true
 [article]
   showDate = true
   #showViews = true
