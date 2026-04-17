@@ -25,20 +25,20 @@ mainSections = ["posts"]
   showAppearanceSwitcher = true
   showScrollToTop = true
 
-[homepage]
-  layout = "background"
-  homepageImage = "img/hero-bg.jpg"
-  showRecent = true
-  showRecentItems = 6
-  showMoreLink = true
-  cardView = true
-  layoutBackgroundBlur = true
+[appearance]
+  theme = "dark"               # This gives you the high-end dark look
+  enableApperanceEffects = true # This makes the cards "fade in" as you scroll
 
 [header]
-  layout = "fixed"
+  layout = "fixed"             # This keeps the menu at the top with a blur effect
 
-[appearance]
-  enableApperanceEffects = true
+[homepage]
+  layout = "background"        # This activates the "moving lines" and hero section
+  homepageImage = "img/hero-bg.jpg" 
+  showRecent = true
+  showRecentItems = 6
+  cardView = true              # This turns your projects into those beautiful grid cards
+  layoutBackgroundBlur = true  # This adds the professional "glass" depth
 [article]
   showDate = true
   #showViews = true
