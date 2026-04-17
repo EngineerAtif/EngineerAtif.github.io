@@ -1,7 +1,7 @@
 languageCode = "en"
 languageName = "English"
 weight = 1
-title = "Gray Blowfish"
+title = "Atif Abbas | Mechanical Design"
 contentDir = 'content/en'
 
 
@@ -10,7 +10,7 @@ contentDir = 'content/en'
   isoCode = "en"
   rtl = false
   # logo = "img/logo.png"
-  description = "My awesome website"
+  description = "Mechanical Design Engineer & 3D Specialist"
   # copyright = "Copy, _right?_ :thinking_face:"
   dateFormat = "2 January 2006"
 
