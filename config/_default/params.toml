@@ -1,63 +1,43 @@
 colorScheme = "slate"
-defaultAppearance = "dark" # Changed to dark so your site starts professional
+defaultAppearance = "dark"
 autoSwitchAppearance = true
 
 enableSearch = true
 enableCodeCopy = true
 
-# Change this to "projects" so your engineering work shows up on the home page
 mainSections = ["projects", "posts"]
 
 [header]
-  layout = "fixed" # Menu stays at the top with a glass-blur effect
+  layout = "fixed"
 
 [footer]
   showCopyright = true
-  showThemeAttribution = false # Removes the "Blowfish" link for a cleaner look
+  showThemeAttribution = false
   showAppearanceSwitcher = true
   showScrollToTop = true
 
 [appearance]
   theme = "dark"
-  enableApperanceEffects = true # This makes your project cards fade in smoothly
+  enableApperanceEffects = true
 
 [homepage]
   layout = "background"
   homepageImage = "img/hero-bg.jpg"
   showRecent = true
   showRecentItems = 6
-  cardView = true # This gives you the 3-column grid layout you liked
+  cardView = true
   layoutBackgroundBlur = true
 
 [article]
   showDate = true
-  showDateUpdated = false
   showAuthor = true
   showHero = true
-  heroStyle = "background" # Makes project headers look high-end
+  heroStyle = "background"
   showBreadcrumbs = true
-  showDraftLabel = true
-  showEdit = false
-  editAppendPath = true
-  seriesOpened = false
-  showHeadingAnchors = true
-  showPagination = true
-  invertPagination = false
-  showReadingTime = true
   showTableOfContents = true
-  showTaxonomies = false 
-  showAuthorsBadges = false 
-  showWordCount = true
-  showSummary = true
   sharingLinks = ["linkedin", "twitter", "whatsapp"]
 
 [list]
-  showBreadcrumbs = false
   showSummary = true
-  showTableOfContents = false
   groupByYear = true
-  cardView = true # Ensures your lists also use the professional card look
-  constrainItemsWidth = true
-
-[taxonomy]
-  showTermCount = true
+  cardView = true
