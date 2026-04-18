@@ -22,7 +22,7 @@ mainSections = ["projects", "posts"]
 
 [homepage]
   layout = "background"
-  homepageImage = "img/hero-bg.jpg"
+  homepageImage = "img/avatar.png"
   showRecent = true
   showRecentItems = 6
   cardView = true
