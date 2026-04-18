@@ -1,56 +1,43 @@
-# -- Theme Options --
-# These options control how the theme functions and allow you to
-# customise the display of your website.
-#
-# Refer to the theme docs for more details about each of these parameters.
-# https://nunocoracao.github.io/blowfish/docs/configuration/#theme-parameters
-
 colorScheme = "slate"
-defaultAppearance = "light" # valid options: light or dark
+defaultAppearance = "dark" # Changed to dark so your site starts professional
 autoSwitchAppearance = true
 
 enableSearch = true
 enableCodeCopy = true
 
-mainSections = ["posts"]
-# robots = ""
+# Change this to "projects" so your engineering work shows up on the home page
+mainSections = ["projects", "posts"]
 
 [header]
-  layout = "basic" # valid options: basic, fixed
+  layout = "fixed" # Menu stays at the top with a glass-blur effect
 
 [footer]
- # showMenu = true
   showCopyright = true
-  showThemeAttribution = true
+  showThemeAttribution = false # Removes the "Blowfish" link for a cleaner look
   showAppearanceSwitcher = true
   showScrollToTop = true
 
 [appearance]
-  theme = "dark"               # This gives you the high-end dark look
-  enableApperanceEffects = true # This makes the cards "fade in" as you scroll
-
-[header]
-  layout = "fixed"             # This keeps the menu at the top with a blur effect
+  theme = "dark"
+  enableApperanceEffects = true # This makes your project cards fade in smoothly
 
 [homepage]
-  layout = "background"        # This activates the "moving lines" and hero section
-  homepageImage = "img/hero-bg.jpg" 
+  layout = "background"
+  homepageImage = "img/hero-bg.jpg"
   showRecent = true
   showRecentItems = 6
-  cardView = true              # This turns your projects into those beautiful grid cards
-  layoutBackgroundBlur = true  # This adds the professional "glass" depth
+  cardView = true # This gives you the 3-column grid layout you liked
+  layoutBackgroundBlur = true
+
 [article]
   showDate = true
-  #showViews = true
-  #showLikes = true
   showDateUpdated = false
   showAuthor = true
   showHero = true
-  heroStyle = "basic" # valid options: basic, big, background
+  heroStyle = "background" # Makes project headers look high-end
   showBreadcrumbs = true
   showDraftLabel = true
   showEdit = false
-  # editURL = "https://github.com/username/repo/"
   editAppendPath = true
   seriesOpened = false
   showHeadingAnchors = true
@@ -62,39 +49,15 @@ mainSections = ["posts"]
   showAuthorsBadges = false 
   showWordCount = true
   showSummary = true
-  sharingLinks = [ "linkedin", "twitter", "whatsapp", "pinterest", "reddit", "facebook", "email"]
+  sharingLinks = ["linkedin", "twitter", "whatsapp"]
 
 [list]
   showBreadcrumbs = false
   showSummary = true
   showTableOfContents = false
-  showCards = false
   groupByYear = true
-  cardView = false
-  cardViewScreenWidth = false
+  cardView = true # Ensures your lists also use the professional card look
   constrainItemsWidth = true
-
-[sitemap]
-  excludedKinds = []
 
 [taxonomy]
   showTermCount = true
-
-[firebase]
-  # apiKey = "XXXXXX"
-  # authDomain = "XXXXXX"
-  # projectId = "XXXXXX"
-  # storageBucket = "XXXXXX"
-  # messagingSenderId = "XXXXXX"
-  # appId = "XXXXXX"
-  # measurementId = "XXXXXX"
-
-[fathomAnalytics]
-  # site = "ABC12345"
-  # domain = "llama.yoursite.com"
-
-[verification]
-  # google = ""
-  # bing = ""
-  # pinterest = ""
-  # yandex = ""
