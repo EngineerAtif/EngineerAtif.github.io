@@ -27,6 +27,7 @@ mainSections = ["projects", "posts"]
   showRecentItems = 6
   cardView = true
   layoutBackgroundBlur = true
+  canvas = true
 
 [article]
   showDate = true
