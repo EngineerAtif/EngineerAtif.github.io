@@ -1,3 +1,4 @@
+# -- Theme Options --
 colorScheme = "slate"
 defaultAppearance = "dark"
 autoSwitchAppearance = true
@@ -5,6 +6,7 @@ autoSwitchAppearance = true
 enableSearch = true
 enableCodeCopy = true
 
+# This looks for your engineering work in the projects folder
 mainSections = ["projects", "posts"]
 
 [header]
@@ -22,12 +24,18 @@ mainSections = ["projects", "posts"]
 
 [homepage]
   layout = "background"
-  homepageImage = "img/avatar.png"
+  homepageImage = "img/hero-bg.jpg"
+  canvas = true
   showRecent = true
   showRecentItems = 6
   cardView = true
   layoutBackgroundBlur = true
-  canvas = true
+
+[canvas]
+  enable = true
+  duration = 20
+  speed = 10
+  color = "primary"
 
 [article]
   showDate = true
@@ -36,9 +44,15 @@ mainSections = ["projects", "posts"]
   heroStyle = "background"
   showBreadcrumbs = true
   showTableOfContents = true
+  showWordCount = true
+  showSummary = true
   sharingLinks = ["linkedin", "twitter", "whatsapp"]
 
 [list]
   showSummary = true
   groupByYear = true
   cardView = true
+  constrainItemsWidth = true
+
+[taxonomy]
+  showTermCount = true
