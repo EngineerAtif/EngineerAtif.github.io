@@ -24,7 +24,7 @@ mainSections = ["projects", "posts"]
 
 [homepage]
   layout = "background"
-  homepageImage = "img/hero-bg.jpg"
+  homepageImage = "img/bg.png"
   canvas = true
   showRecent = true
   showRecentItems = 6
