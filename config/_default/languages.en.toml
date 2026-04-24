@@ -15,9 +15,9 @@ contentDir = 'content/en'
   dateFormat = "2 January 2006"
 
 [params.author]
-  name = "Gray Blowfish"
+  name = "Atif | A passionate Mechanical Design Engineer"
   image = "img/avatar.png"
-  headline = "This is my very simple profile website with my links"
+  headline = "Lets your your Design Ideas into Reality"
   bio = "A little bit about you"
    links = [
      { link = "https://nunocoracao.github.io/blowfish/" },
