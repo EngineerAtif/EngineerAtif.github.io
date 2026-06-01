@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Atif Engineering Solutions</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .admin-container {
+            max-width: 800px;
+            margin: 100px auto;
+            padding: 40px;
+        }
+        .login-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-color);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .login-card {
+            width: 100%;
+            max-width: 400px;
+            padding: 40px;
+            border-radius: var(--radius-lg);
+            text-align: center;
+        }
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+        .project-list-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .export-section {
+            margin-top: 60px;
+            padding: 30px;
+            background: rgba(0, 210, 255, 0.05);
+            border: 1px dashed var(--primary-color);
+            border-radius: var(--radius-md);
+        }
+        pre {
+            background: #000;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-size: 0.8rem;
+            margin-top: 20px;
+        }
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+    <div id="login-screen" class="login-overlay">
+        <div class="glass login-card">
+            <p class="mono">Secure Access</p>
+            <h2 style="margin: 10px 0 30px 0;">Admin Login</h2>
+            <form id="login-form">
+                <input type="password" id="password" placeholder="Enter Password" style="margin-bottom: 20px;" required>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Access Dashboard</button>
+            </form>
+            <p id="login-error" style="color: #ef4444; margin-top: 15px; font-size: 0.8rem;" class="hidden">Incorrect password. Try 'admin123'</p>
+        </div>
+    </div>
+
+    <div id="admin-dashboard" class="container admin-container hidden">
+        <div class="admin-header">
+            <div>
+                <p class="mono">Management</p>
+                <h1>Project Dashboard</h1>
+            </div>
+            <button id="logout-btn" class="btn btn-outline">Logout</button>
+        </div>
+
+        <section class="glass" style="padding: 30px; border-radius: var(--radius-lg); margin-bottom: 40px;">
+            <h3 id="form-title">Add New Project</h3>
+            <form id="add-project-form" style="margin-top: 20px;">
+                <div class="form-grid">
+                    <input type="text" id="p-title" placeholder="Project Title" required>
+                    <input type="text" id="p-category" placeholder="Category (e.g. Mechanical Design)" required>
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <label class="mono" style="font-size: 0.7rem; display: block; margin-bottom: 10px;">Project Images (GitHub Repository Paths)</label>
+                    <p style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 12px;">Upload your images to <code>assets/projects/</code> in your GitHub repo, then enter filenames below.</p>
+                    <div id="image-paths-container">
+                        <div style="display: flex; gap: 10px; margin-bottom: 8px;">
+                            <input type="text" class="image-path-input" placeholder="e.g. assets/projects/my-project-1.png" style="flex: 1;">
+                            <button type="button" onclick="addImagePathField()" class="btn btn-outline btn-sm" style="white-space: nowrap;">+ Add</button>
+                        </div>
+                    </div>
+                    <div id="image-preview-container" style="display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap;"></div>
+                </div>
+
+                <div class="form-grid" style="margin-bottom: 20px;">
+                    <textarea id="p-desc" placeholder="Full Project Description" rows="5" required></textarea>
+                    <div>
+                        <input type="text" id="p-tags" placeholder="Tags (comma separated: CAD, Robotics, etc)" style="margin-bottom: 15px;">
+                        <input type="url" id="p-video" placeholder="Optional: YouTube/Vimeo Video URL">
+                    </div>
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <button type="submit" id="submit-btn" class="btn btn-primary" style="flex: 1;">Add to Portfolio</button>
+                    <button type="button" id="cancel-edit-btn" class="btn btn-outline hidden">Cancel Edit</button>
+                </div>
+            </form>
+        </section>
+
+        <section class="glass" style="padding: 30px; border-radius: var(--radius-lg); margin-bottom: 40px;">
+            <h3>Brand Profile (About Section)</h3>
+            <form id="about-form" style="margin-top: 20px;">
+                <div class="form-grid">
+                    <input type="text" id="a-subtitle" placeholder="Subtitle (e.g. About Atif)" required>
+                    <input type="text" id="a-title" placeholder="Main Title" required>
+                </div>
+                <textarea id="a-desc" placeholder="About Description (Use double newlines for paragraphs)" rows="5" style="margin-bottom: 20px;" required></textarea>
+                <div style="margin-bottom: 20px;">
+                    <label class="mono" style="font-size: 0.7rem; display: block; margin-bottom: 10px;">Upload Profile Image</label>
+                    <input type="file" id="a-image-file" accept="image/*" style="display: none;">
+                    <label for="a-image-file" class="btn btn-outline" style="width: 100%; border-style: dashed;">
+                        📁 Select Image
+                    </label>
+                    <div id="about-preview-container" style="margin-top: 15px;"></div>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Save Brand Profile</button>
+            </form>
+        </section>
+
+        <section>
+            <h3>Current Projects</h3>
+            <div id="admin-project-list" style="margin-top: 20px;">
+                <!-- List of projects -->
+            </div>
+        </section>
+
+        <section class="export-section">
+            <h3>🚀 Deploy Updates to GitHub</h3>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 10px;">
+                Since you are using Vercel, copy the code below and paste it into your <code>projects.js</code> file on GitHub. 
+                Vercel will automatically redeploy with your new projects!
+            </p>
+            <button id="copy-code-btn" class="btn btn-outline btn-sm" style="margin-top: 15px;">Copy Code</button>
+            <pre id="export-code"></pre>
+        </section>
+    </div>
+
+    <script src="projects.js"></script>
+    <script>
+        const loginForm = document.getElementById('login-form');
+        const loginScreen = document.getElementById('login-screen');
+        const dashboard = document.getElementById('admin-dashboard');
+        const projectList = document.getElementById('admin-project-list');
+        const addProjectForm = document.getElementById('add-project-form');
+        const exportCode = document.getElementById('export-code');
+
+        // Simple mock login
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const pass = document.getElementById('password').value;
+            if (pass === 'admin6969' || pass === 'atif6969') {
+                loginScreen.classList.add('hidden');
+                dashboard.classList.remove('hidden');
+                renderAdminProjects();
+            } else {
+                document.getElementById('login-error').classList.remove('hidden');
+            }
+        });
+
+        document.getElementById('logout-btn').addEventListener('click', () => {
+            loginScreen.classList.remove('hidden');
+            dashboard.classList.add('hidden');
+        });
+
+        function renderAdminProjects() {
+            const currentProjects = getProjects();
+            projectList.innerHTML = currentProjects.map(p => `
+                <div class="project-list-item glass" style="margin-bottom: 10px; border-radius: 8px;">
+                    <div>
+                        <strong>${p.title}</strong>
+                        <div style="font-size: 0.7rem; color: var(--text-muted);">${p.category}</div>
+                    </div>
+                    <div style="display: flex; gap: 10px;">
+                        <button onclick="editProject(${p.id})" class="btn btn-outline btn-sm" style="color: var(--primary-color); border-color: rgba(56, 189, 248, 0.2);">Edit</button>
+                        <button onclick="deleteProject(${p.id})" class="btn btn-outline btn-sm" style="color: #ef4444; border-color: rgba(239, 68, 68, 0.2);">Delete</button>
+                    </div>
+                </div>
+            `).join('');
+            
+            updateExportCode();
+        }
+
+        let editingProjectId = null;
+        const formTitle = document.getElementById('form-title');
+        const submitBtn = document.getElementById('submit-btn');
+        const cancelEditBtn = document.getElementById('cancel-edit-btn');
+
+        window.editProject = (id) => {
+            const project = getProjects().find(p => p.id === id);
+            if (!project) return;
+
+            editingProjectId = id;
+            formTitle.innerText = 'Edit Project';
+            submitBtn.innerText = 'Save Changes';
+            cancelEditBtn.classList.remove('hidden');
+
+            document.getElementById('p-title').value = project.title;
+            document.getElementById('p-category').value = project.category;
+            document.getElementById('p-desc').value = project.description;
+            document.getElementById('p-tags').value = project.tags.join(', ');
+            document.getElementById('p-video').value = project.videoUrl || '';
+            
+            // Populate image path fields with existing images
+            imagePaths = [...project.images];
+            const pathContainer = document.getElementById('image-paths-container');
+            pathContainer.innerHTML = '';
+            project.images.forEach((imgPath, idx) => {
+                const row = document.createElement('div');
+                row.style.display = 'flex';
+                row.style.gap = '10px';
+                row.style.marginBottom = '8px';
+                if (idx === 0) {
+                    row.innerHTML = `
+                        <input type="text" class="image-path-input" value="${imgPath}" placeholder="e.g. assets/projects/my-project-1.png" style="flex: 1;">
+                        <button type="button" onclick="addImagePathField()" class="btn btn-outline btn-sm" style="white-space: nowrap;">+ Add</button>
+                    `;
+                } else {
+                    row.innerHTML = `
+                        <input type="text" class="image-path-input" value="${imgPath}" placeholder="e.g. assets/projects/my-project-2.png" style="flex: 1;">
+                        <button type="button" onclick="this.parentElement.remove()" class="btn btn-outline btn-sm" style="color: #ef4444; border-color: rgba(239,68,68,0.2);">✕</button>
+                    `;
+                }
+                pathContainer.appendChild(row);
+            });
+            renderImagePreviews();
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+
+
+
+        const previewContainer = document.getElementById('image-preview-container');
+        let imagePaths = [];
+
+        function addImagePathField() {
+            const container = document.getElementById('image-paths-container');
+            const row = document.createElement('div');
+            row.style.display = 'flex';
+            row.style.gap = '10px';
+            row.style.marginBottom = '8px';
+            row.innerHTML = `
+                <input type="text" class="image-path-input" placeholder="e.g. assets/projects/my-project-2.png" style="flex: 1;">
+                <button type="button" onclick="this.parentElement.remove()" class="btn btn-outline btn-sm" style="color: #ef4444; border-color: rgba(239,68,68,0.2);">✕</button>
+            `;
+            container.appendChild(row);
+        }
+        window.addImagePathField = addImagePathField;
+
+        function getImagePathsFromForm() {
+            const inputs = document.querySelectorAll('.image-path-input');
+            return Array.from(inputs).map(i => i.value.trim()).filter(v => v.length > 0);
+        }
+
+        function renderImagePreviews() {
+            previewContainer.innerHTML = '';
+            imagePaths.forEach((path, index) => {
+                const wrapper = document.createElement('div');
+                wrapper.style.position = 'relative';
+                wrapper.style.display = 'inline-block';
+                
+                const img = document.createElement('img');
+                img.src = path;
+                img.style.width = '80px'; img.style.height = '80px'; img.style.objectFit = 'cover';
+                img.style.borderRadius = '8px'; img.style.border = '1px solid var(--border-color)';
+                img.onerror = () => { img.style.display = 'none'; wrapper.innerHTML += '<div style="width:80px;height:80px;border-radius:8px;background:var(--surface-hover);display:flex;align-items:center;justify-content:center;font-size:0.6rem;color:var(--text-muted);text-align:center;padding:4px;">Image<br>Path</div>'; };
+                
+                wrapper.appendChild(img);
+                previewContainer.appendChild(wrapper);
+            });
+        }
+
+        cancelEditBtn.addEventListener('click', () => {
+            resetForm();
+        });
+
+        function resetForm() {
+            editingProjectId = null;
+            formTitle.innerText = 'Add New Project';
+            submitBtn.innerText = 'Add to Portfolio';
+            cancelEditBtn.classList.add('hidden');
+            addProjectForm.reset();
+            previewContainer.innerHTML = '';
+            imagePaths = [];
+            // Reset image path fields to just one
+            const container = document.getElementById('image-paths-container');
+            container.innerHTML = `
+                <div style="display: flex; gap: 10px; margin-bottom: 8px;">
+                    <input type="text" class="image-path-input" placeholder="e.g. assets/projects/my-project-1.png" style="flex: 1;">
+                    <button type="button" onclick="addImagePathField()" class="btn btn-outline btn-sm" style="white-space: nowrap;">+ Add</button>
+                </div>
+            `;
+        }
+
+        addProjectForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const paths = getImagePathsFromForm();
+            if (paths.length === 0) {
+                alert('Please enter at least one image path (e.g. assets/projects/image.png).');
+                return;
+            }
+
+            const projectData = {
+                id: editingProjectId || Date.now(),
+                title: document.getElementById('p-title').value,
+                category: document.getElementById('p-category').value,
+                images: paths,
+                description: document.getElementById('p-desc').value,
+                tags: document.getElementById('p-tags').value.split(',').map(t => t.trim()),
+                videoUrl: document.getElementById('p-video').value
+            };
+
+            const currentProjects = getProjects();
+            
+            if (editingProjectId) {
+                const index = currentProjects.findIndex(p => p.id === editingProjectId);
+                currentProjects[index] = projectData;
+            } else {
+                currentProjects.push(projectData);
+            }
+
+            saveProjects(currentProjects);
+            resetForm();
+            renderAdminProjects();
+            alert(editingProjectId ? 'Project updated successfully!' : 'Project added successfully!');
+        });
+
+        window.deleteProject = (id) => {
+            if (confirm('Are you sure you want to delete this project?')) {
+                const currentProjects = getProjects();
+                const filtered = currentProjects.filter(p => p.id !== id);
+                saveProjects(filtered);
+                renderAdminProjects();
+            }
+        };
+
+        // About Section Logic
+        function convertToBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = error => reject(error);
+                reader.readAsDataURL(file);
+            });
+        }
+
+        const aboutForm = document.getElementById('about-form');
+        const aboutImageInput = document.getElementById('a-image-file');
+        const aboutPreviewContainer = document.getElementById('about-preview-container');
+        let aboutImageBase64 = '';
+
+        function loadAboutDataIntoForm() {
+            if (typeof getAboutData !== 'undefined') {
+                const data = getAboutData();
+                document.getElementById('a-subtitle').value = data.subtitle;
+                document.getElementById('a-title').value = data.title;
+                document.getElementById('a-desc').value = data.desc;
+                if (data.image) {
+                    aboutImageBase64 = data.image;
+                    aboutPreviewContainer.innerHTML = `<img src="${aboutImageBase64}" style="width:100px; height:100px; object-fit:cover; border-radius:8px;">`;
+                }
+            }
+        }
+        loadAboutDataIntoForm();
+
+        aboutImageInput.addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                aboutImageBase64 = await convertToBase64(file);
+                aboutPreviewContainer.innerHTML = `<img src="${aboutImageBase64}" style="width:100px; height:100px; object-fit:cover; border-radius:8px;">`;
+            }
+        });
+
+        aboutForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const newAboutData = {
+                subtitle: document.getElementById('a-subtitle').value,
+                title: document.getElementById('a-title').value,
+                desc: document.getElementById('a-desc').value,
+                image: aboutImageBase64
+            };
+            saveAboutData(newAboutData);
+            updateExportCode();
+            alert('Brand Profile saved!');
+        });
+
+        function updateExportCode() {
+            const currentProjects = getProjects();
+            const currentAbout = typeof getAboutData !== 'undefined' ? getAboutData() : {};
+            const code = `const initialProjects = ${JSON.stringify(currentProjects, null, 4)};
+
+// --- PROJECT IMAGE STORAGE ARCHITECTURE ---
+// All project images are stored as static files inside the repository at:
+//   assets/projects/<image-name>.png
+//
+// Image URLs use relative paths so they resolve on GitHub Pages or any static host.
+// localStorage is NOT used for project data.
+
+let projects = initialProjects;
+
+const initialAboutData = ${JSON.stringify(currentAbout, null, 4)};
+
+let aboutData = JSON.parse(localStorage.getItem('atif_about')) || initialAboutData;
+
+function getProjects() {
+    return projects;
+}
+
+function saveProjects(newProjects) {
+    projects = newProjects;
+}
+
+function getAboutData() {
+    return aboutData;
+}
+
+function saveAboutData(newData) {
+    localStorage.setItem('atif_about', JSON.stringify(newData));
+    aboutData = newData;
+}`;
+            exportCode.innerText = code;
+        }
+
+        document.getElementById('copy-code-btn').addEventListener('click', () => {
+            navigator.clipboard.writeText(exportCode.innerText);
+            alert('Code copied! Now paste it into projects.js on GitHub.');
+        });
+    </script>
+</body>
+</html>
