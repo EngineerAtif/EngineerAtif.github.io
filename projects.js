@@ -46,21 +46,6 @@ const initialProjects = [
         ]
     },
     {
-        "id": 4,
-        "title": "Centrifugal Pump Impeller",
-        "category": "CFD Analysis",
-        "description": "CFD optimized impeller for a heavy-duty industrial pump. Redesigned the vane geometry to increase hydraulic efficiency by 12% and reduce cavitation risk in high-temperature applications.",
-        "images": [
-            "assets/projects/pump-impeller-1.png",
-            "assets/projects/pump-impeller-2.png"
-        ],
-        "tags": [
-            "CFD",
-            "Fluid Dynamics",
-            "Pump Design"
-        ]
-    },
-    {
         "id": 1780373717034,
         "title": "Minimalist LED Acrylic Pendant Enclosure Design",
         "category": "Product Design ",
