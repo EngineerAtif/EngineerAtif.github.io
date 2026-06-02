@@ -53,9 +53,6 @@
             border: 1px solid rgba(249, 115, 22, 0.2);
             background: rgba(249, 115, 22, 0.03);
         }
-        .gh-config-panel .form-grid {
-            margin-bottom: 0;
-        }
         .gh-status {
             display: inline-flex;
             align-items: center;
@@ -88,18 +85,10 @@
             max-height: 300px;
             overflow-y: auto;
         }
-        .deploy-progress .step {
-            color: var(--text-muted);
-        }
-        .deploy-progress .step.done {
-            color: #22c55e;
-        }
-        .deploy-progress .step.error {
-            color: #ef4444;
-        }
-        .deploy-progress .step.active {
-            color: var(--primary-color);
-        }
+        .deploy-progress .step { color: var(--text-muted); }
+        .deploy-progress .step.done { color: #22c55e; }
+        .deploy-progress .step.error { color: #ef4444; }
+        .deploy-progress .step.active { color: var(--primary-color); }
 
         /* Image upload area */
         .image-upload-zone {
@@ -188,11 +177,11 @@
         <!-- GitHub Configuration -->
         <section class="gh-config-panel glass">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-                <h3>âš™ï¸ GitHub Auto-Deploy</h3>
-                <span id="gh-status" class="gh-status disconnected">â— Not Connected</span>
+                <h3>GitHub Auto-Deploy</h3>
+                <span id="gh-status" class="gh-status disconnected">Not Connected</span>
             </div>
             <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 16px;">
-                Enter your GitHub Personal Access Token (PAT) with <code>repo</code> scope. 
+                Enter your GitHub Personal Access Token (PAT) with <code>repo</code> scope.
                 Images &amp; data are auto-pushed to your repo on save. Token is stored locally in your browser.
             </p>
             <div style="display: flex; gap: 10px;">
@@ -200,7 +189,7 @@
                 <button type="button" id="gh-connect-btn" class="btn btn-primary btn-sm">Connect</button>
             </div>
             <div id="gh-repo-info" style="margin-top: 12px; font-size: 0.75rem; color: var(--text-muted);" class="hidden">
-                Repository: <strong>EngineerAtif/EngineerAtif.github.io</strong> Â· Branch: <strong>main</strong>
+                Repository: <strong>EngineerAtif/EngineerAtif.github.io</strong> &middot; Branch: <strong>main</strong>
             </div>
         </section>
 
@@ -212,13 +201,13 @@
                     <input type="text" id="p-title" placeholder="Project Title" required>
                     <input type="text" id="p-category" placeholder="Category (e.g. Mechanical Design)" required>
                 </div>
-                
+
                 <div style="margin-bottom: 20px;">
                     <label class="mono" style="font-size: 0.7rem; display: block; margin-bottom: 10px;">Upload Project Images</label>
                     <input type="file" id="p-image-files" accept="image/*" multiple style="display: none;">
                     <label for="p-image-files" class="image-upload-zone" id="project-upload-zone">
-                        ðŸ“ <strong>Click to select images</strong> or drag and drop
-                        <p>PNG, JPG, WEBP â€” uploaded to GitHub on save</p>
+                        <strong>Click to select images</strong> or drag and drop
+                        <p>PNG, JPG, WEBP &mdash; uploaded to GitHub on save</p>
                     </label>
                     <div id="image-preview-container" class="image-preview-grid"></div>
                 </div>
@@ -231,7 +220,7 @@
                     </div>
                 </div>
                 <div style="display: flex; gap: 10px;">
-                    <button type="submit" id="submit-btn" class="btn btn-primary" style="flex: 1;">ðŸš€ Save &amp; Deploy to GitHub</button>
+                    <button type="submit" id="submit-btn" class="btn btn-primary" style="flex: 1;">SAVE &amp; DEPLOY TO GITHUB</button>
                     <button type="button" id="cancel-edit-btn" class="btn btn-outline hidden">Cancel Edit</button>
                 </div>
                 <div id="project-deploy-log" class="deploy-progress hidden"></div>
@@ -251,12 +240,12 @@
                     <label class="mono" style="font-size: 0.7rem; display: block; margin-bottom: 10px;">Upload Profile Image</label>
                     <input type="file" id="a-image-file" accept="image/*" style="display: none;">
                     <label for="a-image-file" class="image-upload-zone">
-                        ðŸ“ <strong>Click to select profile image</strong>
+                        <strong>Click to select profile image</strong>
                         <p>Uploaded to GitHub on save</p>
                     </label>
                     <div id="about-preview-container" style="margin-top: 15px;"></div>
                 </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%;">ðŸš€ Save &amp; Deploy About Profile</button>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">SAVE &amp; DEPLOY ABOUT PROFILE</button>
                 <div id="about-deploy-log" class="deploy-progress hidden"></div>
             </form>
         </section>
@@ -264,9 +253,7 @@
         <!-- Current Projects -->
         <section>
             <h3>Current Projects</h3>
-            <div id="admin-project-list" style="margin-top: 20px;">
-                <!-- List of projects -->
-            </div>
+            <div id="admin-project-list" style="margin-top: 20px;"></div>
         </section>
     </div>
 
@@ -274,11 +261,8 @@
     <script>
     // ============================================================
     //  GITHUB API AUTO-DEPLOY ENGINE v2
-    //  - GitHub is the SINGLE SOURCE OF TRUTH
-    //  - Projects are loaded from GitHub on connect
-    //  - Full bidirectional: Add / Edit / Delete
-    //  - Images are uploaded AND deleted from GitHub
-    //  - SHA is always fetched fresh to prevent 409 conflicts
+    //  GitHub = single source of truth
+    //  Full bidirectional: Add / Edit / Delete
     // ============================================================
     const GITHUB_OWNER = 'EngineerAtif';
     const GITHUB_REPO = 'EngineerAtif.github.io';
@@ -286,39 +270,37 @@
     const GITHUB_API = 'https://api.github.com';
 
     let githubToken = localStorage.getItem('gh_deploy_token') || '';
-    let liveProjects = [];   // Projects loaded from GitHub (source of truth)
-    let liveAboutData = {};  // About data loaded from GitHub
+    let liveProjects = [];
+    let liveAboutData = {};
 
     // --- GitHub API Core ---
 
     async function ghFetch(endpoint, options = {}) {
-        const res = await fetch(`${GITHUB_API}/repos/${GITHUB_OWNER}/${GITHUB_REPO}${endpoint}`, {
+        const res = await fetch(GITHUB_API + '/repos/' + GITHUB_OWNER + '/' + GITHUB_REPO + endpoint, {
             ...options,
             headers: {
-                'Authorization': `token ${githubToken}`,
+                'Authorization': 'token ' + githubToken,
                 'Accept': 'application/vnd.github.v3+json',
                 'Content-Type': 'application/json',
                 ...(options.headers || {})
             }
         });
         if (!res.ok) {
-            const err = await res.json().catch(() => ({}));
-            throw new Error(`GitHub API ${res.status}: ${err.message || res.statusText}`);
+            const err = await res.json().catch(function() { return {}; });
+            throw new Error('GitHub API ' + res.status + ': ' + (err.message || res.statusText));
         }
         return res.json();
     }
 
-    // Always get FRESH SHA right before writing (prevents 409 conflicts)
     async function getFreshSHA(path) {
         try {
-            const data = await ghFetch(`/contents/${path}?ref=${GITHUB_BRANCH}&t=${Date.now()}`);
+            const data = await ghFetch('/contents/' + path + '?ref=' + GITHUB_BRANCH + '&t=' + Date.now());
             return data.sha;
-        } catch {
+        } catch (e) {
             return null;
         }
     }
 
-    // Upload or update a file â€” always fetches fresh SHA first
     async function uploadFileToGitHub(path, contentBase64, commitMessage) {
         const sha = await getFreshSHA(path);
         const body = {
@@ -327,17 +309,16 @@
             branch: GITHUB_BRANCH
         };
         if (sha) body.sha = sha;
-        return ghFetch(`/contents/${path}`, {
+        return ghFetch('/contents/' + path, {
             method: 'PUT',
             body: JSON.stringify(body)
         });
     }
 
-    // Delete a file from GitHub
     async function deleteFileFromGitHub(path, commitMessage) {
         const sha = await getFreshSHA(path);
-        if (!sha) return; // File doesn't exist, nothing to delete
-        return ghFetch(`/contents/${path}`, {
+        if (!sha) return;
+        return ghFetch('/contents/' + path, {
             method: 'DELETE',
             body: JSON.stringify({
                 message: commitMessage,
@@ -347,49 +328,40 @@
         });
     }
 
-    // Fetch and parse projects.js from GitHub
     async function fetchProjectsFromGitHub() {
         try {
-            const data = await ghFetch(`/contents/projects.js?ref=${GITHUB_BRANCH}&t=${Date.now()}`);
-            const content = atob(data.content.replace(/\n/g, ''));
-            const decoded = decodeURIComponent(escape(content));
-            
-            // Parse initialProjects array
-            const projectsMatch = decoded.match(/const initialProjects\s*=\s*(\[[\s\S]*?\]);/);
-            if (projectsMatch) {
-                liveProjects = JSON.parse(projectsMatch[1]);
-            }
-            
-            // Parse initialAboutData object  
-            const aboutMatch = decoded.match(/const initialAboutData\s*=\s*(\{[\s\S]*?\});/);
-            if (aboutMatch) {
-                liveAboutData = JSON.parse(aboutMatch[1]);
-            }
-            
+            var data = await ghFetch('/contents/projects.js?ref=' + GITHUB_BRANCH + '&t=' + Date.now());
+            var raw = atob(data.content.replace(/\n/g, ''));
+            var decoded = decodeURIComponent(escape(raw));
+
+            var pm = decoded.match(/const initialProjects\s*=\s*(\[[\s\S]*?\]);/);
+            if (pm) liveProjects = JSON.parse(pm[1]);
+
+            var am = decoded.match(/const initialAboutData\s*=\s*(\{[\s\S]*?\});/);
+            if (am) liveAboutData = JSON.parse(am[1]);
+
             return true;
         } catch (err) {
-            console.error('Failed to fetch projects from GitHub:', err);
-            // Fall back to local data
+            console.error('Sync failed:', err);
             liveProjects = getProjects();
             liveAboutData = typeof getAboutData === 'function' ? getAboutData() : {};
             return false;
         }
     }
 
-    // File helpers
     function fileToBase64(file) {
-        return new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.onload = () => resolve(reader.result.split(',')[1]);
+        return new Promise(function(resolve, reject) {
+            var reader = new FileReader();
+            reader.onload = function() { resolve(reader.result.split(',')[1]); };
             reader.onerror = reject;
             reader.readAsDataURL(file);
         });
     }
 
     function fileToDataURL(file) {
-        return new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.onload = () => resolve(reader.result);
+        return new Promise(function(resolve, reject) {
+            var reader = new FileReader();
+            reader.onload = function() { resolve(reader.result); };
             reader.onerror = reject;
             reader.readAsDataURL(file);
         });
@@ -399,81 +371,58 @@
         return text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
     }
 
-    // Generate projects.js content
     function generateProjectsJS(projectsList, aboutObj) {
-        return `const initialProjects = ${JSON.stringify(projectsList, null, 4)};
-
-// Auto-deployed from Admin Dashboard
-// Images stored at assets/projects/ and assets/about/
-
-let projects = initialProjects;
-
-const initialAboutData = ${JSON.stringify(aboutObj, null, 4)};
-
-let aboutData = initialAboutData;
-
-function getProjects() {
-    return projects;
-}
-
-function saveProjects(newProjects) {
-    projects = newProjects;
-}
-
-function getAboutData() {
-    return aboutData;
-}
-
-function saveAboutData(newData) {
-    aboutData = newData;
-}
-`;
+        return 'const initialProjects = ' + JSON.stringify(projectsList, null, 4) + ';\n\n' +
+            '// Auto-deployed from Admin Dashboard\n\n' +
+            'let projects = initialProjects;\n\n' +
+            'const initialAboutData = ' + JSON.stringify(aboutObj, null, 4) + ';\n\n' +
+            'let aboutData = initialAboutData;\n\n' +
+            'function getProjects() {\n    return projects;\n}\n\n' +
+            'function saveProjects(newProjects) {\n    projects = newProjects;\n}\n\n' +
+            'function getAboutData() {\n    return aboutData;\n}\n\n' +
+            'function saveAboutData(newData) {\n    aboutData = newData;\n}\n';
     }
 
-    // Deploy updated projects.js to GitHub
     async function deployProjectsJS(commitMessage) {
-        const jsContent = generateProjectsJS(liveProjects, liveAboutData);
-        const jsBase64 = btoa(unescape(encodeURIComponent(jsContent)));
+        var jsContent = generateProjectsJS(liveProjects, liveAboutData);
+        var jsBase64 = btoa(unescape(encodeURIComponent(jsContent)));
         await uploadFileToGitHub('projects.js', jsBase64, commitMessage);
     }
 
-    // Deploy log helper
-    function logStep(containerId, message, status = 'active') {
-        const container = document.getElementById(containerId);
+    function logStep(containerId, message, status) {
+        status = status || 'active';
+        var container = document.getElementById(containerId);
         container.classList.remove('hidden');
-        const div = document.createElement('div');
-        div.className = `step ${status}`;
-        const prefix = status === 'done' ? 'âœ“' : status === 'error' ? 'âœ•' : 'âŸ³';
-        div.textContent = `${prefix} ${message}`;
+        var div = document.createElement('div');
+        div.className = 'step ' + status;
+        var prefix = status === 'done' ? '[OK] ' : status === 'error' ? '[ERR] ' : '>> ';
+        div.textContent = prefix + message;
         container.appendChild(div);
         container.scrollTop = container.scrollHeight;
     }
 
     function clearLog(containerId) {
-        const container = document.getElementById(containerId);
+        var container = document.getElementById(containerId);
         container.innerHTML = '';
         container.classList.add('hidden');
     }
 
-
     // ============================================================
     //  UI LOGIC
     // ============================================================
-    const loginForm = document.getElementById('login-form');
-    const loginScreen = document.getElementById('login-screen');
-    const dashboard = document.getElementById('admin-dashboard');
-    const projectList = document.getElementById('admin-project-list');
-    const addProjectForm = document.getElementById('add-project-form');
+    var loginForm = document.getElementById('login-form');
+    var loginScreen = document.getElementById('login-screen');
+    var dashboard = document.getElementById('admin-dashboard');
+    var projectList = document.getElementById('admin-project-list');
+    var addProjectForm = document.getElementById('add-project-form');
 
-    // --- Login ---
-    loginForm.addEventListener('submit', (e) => {
+    loginForm.addEventListener('submit', function(e) {
         e.preventDefault();
-        const pass = document.getElementById('password').value;
+        var pass = document.getElementById('password').value;
         if (pass === 'admin6969' || pass === 'atif6969') {
             loginScreen.classList.add('hidden');
             dashboard.classList.remove('hidden');
             initGitHubConnection();
-            // Load local data as fallback until GitHub syncs
             liveProjects = getProjects();
             liveAboutData = typeof getAboutData === 'function' ? getAboutData() : {};
             renderAdminProjects();
@@ -483,70 +432,64 @@ function saveAboutData(newData) {
         }
     });
 
-    document.getElementById('logout-btn').addEventListener('click', () => {
+    document.getElementById('logout-btn').addEventListener('click', function() {
         loginScreen.classList.remove('hidden');
         dashboard.classList.add('hidden');
     });
 
-    // --- GitHub Connection ---
     function initGitHubConnection() {
-        const tokenInput = document.getElementById('gh-token');
+        var tokenInput = document.getElementById('gh-token');
         if (githubToken) {
             tokenInput.value = githubToken;
             verifyGitHubToken();
         }
     }
 
-    document.getElementById('gh-connect-btn').addEventListener('click', async () => {
-        const tokenInput = document.getElementById('gh-token');
+    document.getElementById('gh-connect-btn').addEventListener('click', async function() {
+        var tokenInput = document.getElementById('gh-token');
         githubToken = tokenInput.value.trim();
-        if (!githubToken) {
-            alert('Please enter your GitHub PAT token.');
-            return;
-        }
+        if (!githubToken) { alert('Please enter your GitHub PAT token.'); return; }
         await verifyGitHubToken();
     });
 
     async function verifyGitHubToken() {
-        const statusEl = document.getElementById('gh-status');
-        const repoInfo = document.getElementById('gh-repo-info');
+        var statusEl = document.getElementById('gh-status');
+        var repoInfo = document.getElementById('gh-repo-info');
         try {
             statusEl.className = 'gh-status disconnected';
-            statusEl.textContent = 'âŸ³ Connecting...';
-            
+            statusEl.textContent = 'Connecting...';
             await ghFetch('');
             localStorage.setItem('gh_deploy_token', githubToken);
-            
-            // Sync projects from GitHub (source of truth)
-            statusEl.textContent = 'âŸ³ Syncing...';
-            const synced = await fetchProjectsFromGitHub();
-            
+
+            statusEl.textContent = 'Syncing...';
+            var synced = await fetchProjectsFromGitHub();
+
             statusEl.className = 'gh-status connected';
-            statusEl.textContent = synced ? 'â— Connected & Synced' : 'â— Connected (local data)';
+            statusEl.textContent = synced ? 'Connected & Synced' : 'Connected (local)';
             repoInfo.classList.remove('hidden');
-            
+
             renderAdminProjects();
             loadAboutDataIntoForm();
         } catch (err) {
             statusEl.className = 'gh-status disconnected';
-            statusEl.textContent = 'â— Failed';
+            statusEl.textContent = 'Failed';
             repoInfo.classList.add('hidden');
             alert('GitHub connection failed: ' + err.message);
         }
     }
 
-    // --- Project Image Upload (Local Preview) ---
-    const imageFileInput = document.getElementById('p-image-files');
-    const previewContainer = document.getElementById('image-preview-container');
-    let selectedImageFiles = [];
-    let selectedImagePreviews = [];
-    let existingImagePaths = [];
+    // --- Image Upload ---
+    var imageFileInput = document.getElementById('p-image-files');
+    var previewContainer = document.getElementById('image-preview-container');
+    var selectedImageFiles = [];
+    var selectedImagePreviews = [];
+    var existingImagePaths = [];
 
-    imageFileInput.addEventListener('change', async (e) => {
-        const files = Array.from(e.target.files);
-        for (const file of files) {
-            const dataUrl = await fileToDataURL(file);
-            selectedImageFiles.push(file);
+    imageFileInput.addEventListener('change', async function(e) {
+        var files = Array.from(e.target.files);
+        for (var i = 0; i < files.length; i++) {
+            var dataUrl = await fileToDataURL(files[i]);
+            selectedImageFiles.push(files[i]);
             selectedImagePreviews.push(dataUrl);
         }
         renderImagePreviews();
@@ -555,50 +498,51 @@ function saveAboutData(newData) {
 
     function renderImagePreviews() {
         previewContainer.innerHTML = '';
-        existingImagePaths.forEach((path, idx) => {
-            const item = document.createElement('div');
+        existingImagePaths.forEach(function(path, idx) {
+            var item = document.createElement('div');
             item.className = 'image-preview-item';
-            item.innerHTML = `
-                <img src="${path}" alt="Project image" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2290%22 height=%2290%22><rect fill=%22%23251f18%22 width=%2290%22 height=%2290%22/><text fill=%22%23a89880%22 x=%2250%25%22 y=%2255%25%22 text-anchor=%22middle%22 font-size=%2210%22>Deployed</text></svg>'">
-                <button type="button" class="remove-btn" onclick="removeExistingImage(${idx})">Ã—</button>
-            `;
+            var img = document.createElement('img');
+            img.src = path;
+            img.alt = 'Project image';
+            img.onerror = function() { img.style.opacity = '0.3'; };
+            var btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'remove-btn';
+            btn.textContent = 'x';
+            btn.onclick = function() { existingImagePaths.splice(idx, 1); renderImagePreviews(); };
+            item.appendChild(img);
+            item.appendChild(btn);
             previewContainer.appendChild(item);
         });
-        selectedImagePreviews.forEach((dataUrl, idx) => {
-            const item = document.createElement('div');
+        selectedImagePreviews.forEach(function(dataUrl, idx) {
+            var item = document.createElement('div');
             item.className = 'image-preview-item';
-            item.innerHTML = `
-                <img src="${dataUrl}" alt="New image">
-                <button type="button" class="remove-btn" onclick="removeNewImage(${idx})">Ã—</button>
-            `;
+            var img = document.createElement('img');
+            img.src = dataUrl;
+            img.alt = 'New image';
+            var btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'remove-btn';
+            btn.textContent = 'x';
+            btn.onclick = function() { selectedImageFiles.splice(idx, 1); selectedImagePreviews.splice(idx, 1); renderImagePreviews(); };
+            item.appendChild(img);
+            item.appendChild(btn);
             previewContainer.appendChild(item);
         });
     }
 
-    window.removeExistingImage = (idx) => {
-        existingImagePaths.splice(idx, 1);
-        renderImagePreviews();
-    };
-
-    window.removeNewImage = (idx) => {
-        selectedImageFiles.splice(idx, 1);
-        selectedImagePreviews.splice(idx, 1);
-        renderImagePreviews();
-    };
-
     // --- Edit / Reset ---
-    let editingProjectId = null;
-    const formTitle = document.getElementById('form-title');
-    const submitBtn = document.getElementById('submit-btn');
-    const cancelEditBtn = document.getElementById('cancel-edit-btn');
+    var editingProjectId = null;
+    var formTitle = document.getElementById('form-title');
+    var submitBtn = document.getElementById('submit-btn');
+    var cancelEditBtn = document.getElementById('cancel-edit-btn');
 
-    window.editProject = (id) => {
-        const project = liveProjects.find(p => p.id === id);
+    window.editProject = function(id) {
+        var project = liveProjects.find(function(p) { return p.id === id; });
         if (!project) return;
-
         editingProjectId = id;
         formTitle.innerText = 'Edit Project';
-        submitBtn.innerText = 'ðŸš€ Save Changes & Deploy';
+        submitBtn.innerText = 'SAVE CHANGES & DEPLOY';
         cancelEditBtn.classList.remove('hidden');
 
         document.getElementById('p-title').value = project.title;
@@ -607,11 +551,10 @@ function saveAboutData(newData) {
         document.getElementById('p-tags').value = project.tags.join(', ');
         document.getElementById('p-video').value = project.videoUrl || '';
 
-        existingImagePaths = [...project.images];
+        existingImagePaths = project.images.slice();
         selectedImageFiles = [];
         selectedImagePreviews = [];
         renderImagePreviews();
-
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
@@ -620,7 +563,7 @@ function saveAboutData(newData) {
     function resetForm() {
         editingProjectId = null;
         formTitle.innerText = 'Add New Project';
-        submitBtn.innerText = 'ðŸš€ Save & Deploy to GitHub';
+        submitBtn.innerText = 'SAVE & DEPLOY TO GITHUB';
         cancelEditBtn.classList.add('hidden');
         addProjectForm.reset();
         selectedImageFiles = [];
@@ -630,202 +573,169 @@ function saveAboutData(newData) {
         clearLog('project-deploy-log');
     }
 
-    // --- Project Save & Deploy ---
-    addProjectForm.addEventListener('submit', async (e) => {
+    // --- Save & Deploy ---
+    addProjectForm.addEventListener('submit', async function(e) {
         e.preventDefault();
-
         if (selectedImageFiles.length === 0 && existingImagePaths.length === 0) {
-            alert('Please upload at least one image.');
-            return;
+            alert('Please upload at least one image.'); return;
         }
-        if (!githubToken) {
-            alert('Please connect your GitHub token first.');
-            return;
-        }
+        if (!githubToken) { alert('Please connect your GitHub token first.'); return; }
 
-        const logId = 'project-deploy-log';
+        var logId = 'project-deploy-log';
         clearLog(logId);
         submitBtn.disabled = true;
-        submitBtn.innerText = 'âŸ³ Deploying...';
+        submitBtn.innerText = 'Deploying...';
 
         try {
-            const projectSlug = slugify(document.getElementById('p-title').value);
-            const allImagePaths = [...existingImagePaths];
+            var projectSlug = slugify(document.getElementById('p-title').value);
+            var allImagePaths = existingImagePaths.slice();
 
-            // Upload new images
-            for (let i = 0; i < selectedImageFiles.length; i++) {
-                const file = selectedImageFiles[i];
-                const ext = file.name.split('.').pop().toLowerCase();
-                const fileName = `${projectSlug}-${Date.now()}-${i + 1}.${ext}`;
-                const ghPath = `assets/projects/${fileName}`;
+            for (var i = 0; i < selectedImageFiles.length; i++) {
+                var file = selectedImageFiles[i];
+                var ext = file.name.split('.').pop().toLowerCase();
+                var fileName = projectSlug + '-' + Date.now() + '-' + (i + 1) + '.' + ext;
+                var ghPath = 'assets/projects/' + fileName;
 
-                logStep(logId, `Uploading image ${i + 1}/${selectedImageFiles.length}: ${fileName}...`);
-                const base64Content = await fileToBase64(file);
-                await uploadFileToGitHub(ghPath, base64Content, `Add image: ${fileName}`);
+                logStep(logId, 'Uploading image ' + (i + 1) + '/' + selectedImageFiles.length + ': ' + fileName + '...');
+                var base64Content = await fileToBase64(file);
+                await uploadFileToGitHub(ghPath, base64Content, 'Add image: ' + fileName);
                 allImagePaths.push(ghPath);
-                logStep(logId, `Image uploaded: ${fileName}`, 'done');
+                logStep(logId, 'Image uploaded: ' + fileName, 'done');
             }
 
-            // Build project data
-            const projectData = {
+            var projectData = {
                 id: editingProjectId || Date.now(),
                 title: document.getElementById('p-title').value,
                 category: document.getElementById('p-category').value,
                 images: allImagePaths,
                 description: document.getElementById('p-desc').value,
-                tags: document.getElementById('p-tags').value.split(',').map(t => t.trim()).filter(t => t),
+                tags: document.getElementById('p-tags').value.split(',').map(function(t) { return t.trim(); }).filter(function(t) { return t; }),
                 videoUrl: document.getElementById('p-video').value || ''
             };
 
-            // Update live projects list
             if (editingProjectId) {
-                const index = liveProjects.findIndex(p => p.id === editingProjectId);
+                var index = liveProjects.findIndex(function(p) { return p.id === editingProjectId; });
                 if (index !== -1) liveProjects[index] = projectData;
             } else {
                 liveProjects.push(projectData);
             }
 
-            // Deploy projects.js
             logStep(logId, 'Updating projects.js on GitHub...');
-            await deployProjectsJS(editingProjectId ? `Update: ${projectData.title}` : `Add: ${projectData.title}`);
+            await deployProjectsJS(editingProjectId ? 'Update: ' + projectData.title : 'Add: ' + projectData.title);
             logStep(logId, 'projects.js deployed', 'done');
-            logStep(logId, 'ðŸš€ Live! Site updates in ~30 seconds.', 'done');
+            logStep(logId, 'Live! Site will update in ~30 seconds.', 'done');
 
             renderAdminProjects();
             resetForm();
 
         } catch (err) {
-            logStep(logId, `Error: ${err.message}`, 'error');
+            logStep(logId, 'Error: ' + err.message, 'error');
             alert('Deploy failed: ' + err.message);
         } finally {
             submitBtn.disabled = false;
-            submitBtn.innerText = editingProjectId ? 'ðŸš€ Save Changes & Deploy' : 'ðŸš€ Save & Deploy to GitHub';
+            submitBtn.innerText = editingProjectId ? 'SAVE CHANGES & DEPLOY' : 'SAVE & DEPLOY TO GITHUB';
         }
     });
 
-    // --- Delete Project (with image cleanup) ---
-    window.deleteProject = async (id) => {
-        const project = liveProjects.find(p => p.id === id);
+    // --- Delete Project ---
+    window.deleteProject = async function(id) {
+        var project = liveProjects.find(function(p) { return p.id === id; });
         if (!project) return;
-        if (!confirm(`Delete "${project.title}" and all its images from GitHub?`)) return;
-        if (!githubToken) {
-            alert('Please connect your GitHub token first.');
-            return;
-        }
+        if (!confirm('Delete "' + project.title + '" and all its images from GitHub?')) return;
+        if (!githubToken) { alert('Please connect your GitHub token first.'); return; }
 
-        // Disable all delete buttons during operation
-        document.querySelectorAll('.delete-btn').forEach(b => b.disabled = true);
+        var buttons = document.querySelectorAll('.delete-btn');
+        buttons.forEach(function(b) { b.disabled = true; b.innerText = '...'; });
 
         try {
-            // 1. Delete each image file from GitHub
-            for (const imgPath of project.images) {
-                if (imgPath.startsWith('assets/')) {
-                    try {
-                        await deleteFileFromGitHub(imgPath, `Delete image: ${imgPath}`);
-                    } catch (err) {
-                        console.warn(`Could not delete ${imgPath}:`, err.message);
-                    }
+            for (var i = 0; i < project.images.length; i++) {
+                var imgPath = project.images[i];
+                if (imgPath.indexOf('assets/') === 0) {
+                    try { await deleteFileFromGitHub(imgPath, 'Delete: ' + imgPath); }
+                    catch (e) { console.warn('Could not delete ' + imgPath); }
                 }
             }
 
-            // 2. Remove project from live list
-            liveProjects = liveProjects.filter(p => p.id !== id);
-
-            // 3. Deploy updated projects.js
-            await deployProjectsJS(`Delete project: ${project.title}`);
-
-            alert(`"${project.title}" deleted from GitHub!`);
+            liveProjects = liveProjects.filter(function(p) { return p.id !== id; });
+            await deployProjectsJS('Delete project: ' + project.title);
+            alert('"' + project.title + '" deleted from GitHub!');
             renderAdminProjects();
 
         } catch (err) {
             alert('Delete failed: ' + err.message);
         } finally {
-            document.querySelectorAll('.delete-btn').forEach(b => b.disabled = false);
+            buttons.forEach(function(b) { b.disabled = false; b.innerText = 'Delete'; });
         }
     };
 
-    // --- Render Project List ---
+    // --- Render Projects ---
     function renderAdminProjects() {
-        projectList.innerHTML = liveProjects.map(p => `
-            <div class="project-list-item glass" style="margin-bottom: 10px; border-radius: 8px;">
-                <div style="display: flex; align-items: center; gap: 12px;">
-                    <img src="${p.images[0] || ''}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 6px; border: 1px solid var(--border-color);" 
-                         onerror="this.style.display='none'">
-                    <div>
-                        <strong>${p.title}</strong>
-                        <div style="font-size: 0.7rem; color: var(--text-muted);">${p.category} Â· ${p.images.length} images</div>
-                    </div>
-                </div>
-                <div style="display: flex; gap: 10px;">
-                    <button onclick="editProject(${p.id})" class="btn btn-outline btn-sm" style="color: var(--primary-color); border-color: rgba(249, 115, 22, 0.2);">Edit</button>
-                    <button onclick="deleteProject(${p.id})" class="btn btn-outline btn-sm delete-btn" style="color: #ef4444; border-color: rgba(239, 68, 68, 0.2);">Delete</button>
-                </div>
-            </div>
-        `).join('');
+        projectList.innerHTML = liveProjects.map(function(p) {
+            return '<div class="project-list-item glass" style="margin-bottom:10px;border-radius:8px;">' +
+                '<div style="display:flex;align-items:center;gap:12px;">' +
+                    '<img src="' + (p.images[0] || '') + '" style="width:50px;height:50px;object-fit:cover;border-radius:6px;border:1px solid var(--border-color);" onerror="this.style.display=\'none\'">' +
+                    '<div><strong>' + p.title + '</strong>' +
+                    '<div style="font-size:0.7rem;color:var(--text-muted);">' + p.category + ' - ' + p.images.length + ' images</div></div>' +
+                '</div>' +
+                '<div style="display:flex;gap:10px;">' +
+                    '<button onclick="editProject(' + p.id + ')" class="btn btn-outline btn-sm" style="color:var(--primary-color);border-color:rgba(249,115,22,0.2);">Edit</button>' +
+                    '<button onclick="deleteProject(' + p.id + ')" class="btn btn-outline btn-sm delete-btn" style="color:#ef4444;border-color:rgba(239,68,68,0.2);">Delete</button>' +
+                '</div></div>';
+        }).join('');
     }
-
 
     // ============================================================
     //  ABOUT SECTION
     // ============================================================
-    const aboutForm = document.getElementById('about-form');
-    const aboutImageInput = document.getElementById('a-image-file');
-    const aboutPreviewContainer = document.getElementById('about-preview-container');
-    let aboutImageFile = null;
-    let aboutImagePreview = '';
-    let aboutImageExistingPath = '';
+    var aboutForm = document.getElementById('about-form');
+    var aboutImageInput = document.getElementById('a-image-file');
+    var aboutPreviewContainer = document.getElementById('about-preview-container');
+    var aboutImageFile = null;
+    var aboutImagePreview = '';
+    var aboutImageExistingPath = '';
 
     function loadAboutDataIntoForm() {
-        const data = liveAboutData;
+        var data = liveAboutData;
         if (data && data.subtitle) {
             document.getElementById('a-subtitle').value = data.subtitle || '';
             document.getElementById('a-title').value = data.title || '';
             document.getElementById('a-desc').value = data.desc || '';
             if (data.image) {
                 aboutImageExistingPath = data.image;
-                aboutPreviewContainer.innerHTML = `
-                    <div class="image-preview-item" style="width: 120px; height: 120px;">
-                        <img src="${data.image}" alt="About image">
-                    </div>`;
+                aboutPreviewContainer.innerHTML = '<div class="image-preview-item" style="width:120px;height:120px;"><img src="' + data.image + '" alt="About"></div>';
             }
         }
     }
 
-    aboutImageInput.addEventListener('change', async (e) => {
-        const file = e.target.files[0];
+    aboutImageInput.addEventListener('change', async function(e) {
+        var file = e.target.files[0];
         if (file) {
             aboutImageFile = file;
             aboutImagePreview = await fileToDataURL(file);
-            aboutPreviewContainer.innerHTML = `
-                <div class="image-preview-item" style="width: 120px; height: 120px;">
-                    <img src="${aboutImagePreview}" alt="New about image">
-                </div>`;
+            aboutPreviewContainer.innerHTML = '<div class="image-preview-item" style="width:120px;height:120px;"><img src="' + aboutImagePreview + '" alt="New"></div>';
         }
     });
 
-    aboutForm.addEventListener('submit', async (e) => {
+    aboutForm.addEventListener('submit', async function(e) {
         e.preventDefault();
-        if (!githubToken) {
-            alert('Please connect your GitHub token first.');
-            return;
-        }
+        if (!githubToken) { alert('Please connect your GitHub token first.'); return; }
 
-        const logId = 'about-deploy-log';
+        var logId = 'about-deploy-log';
         clearLog(logId);
-        const saveBtn = aboutForm.querySelector('button[type="submit"]');
+        var saveBtn = aboutForm.querySelector('button[type="submit"]');
         saveBtn.disabled = true;
-        saveBtn.innerText = 'âŸ³ Deploying...';
+        saveBtn.innerText = 'Deploying...';
 
         try {
-            let imagePath = aboutImageExistingPath;
+            var imagePath = aboutImageExistingPath;
 
             if (aboutImageFile) {
-                const ext = aboutImageFile.name.split('.').pop().toLowerCase();
-                const fileName = `about-profile.${ext}`;
-                const ghPath = `assets/about/${fileName}`;
+                var ext = aboutImageFile.name.split('.').pop().toLowerCase();
+                var fileName = 'about-profile.' + ext;
+                var ghPath = 'assets/about/' + fileName;
 
-                logStep(logId, `Uploading profile image...`);
-                const base64Content = await fileToBase64(aboutImageFile);
+                logStep(logId, 'Uploading profile image...');
+                var base64Content = await fileToBase64(aboutImageFile);
                 await uploadFileToGitHub(ghPath, base64Content, 'Update about profile image');
                 imagePath = ghPath;
                 logStep(logId, 'Profile image uploaded', 'done');
@@ -840,18 +750,18 @@ function saveAboutData(newData) {
 
             logStep(logId, 'Updating projects.js...');
             await deployProjectsJS('Update about profile');
-            logStep(logId, 'ðŸš€ Live! Site updates in ~30 seconds.', 'done');
+            logStep(logId, 'Live! Site will update in ~30 seconds.', 'done');
 
             aboutImageExistingPath = imagePath;
             aboutImageFile = null;
             aboutImagePreview = '';
 
         } catch (err) {
-            logStep(logId, `Error: ${err.message}`, 'error');
+            logStep(logId, 'Error: ' + err.message, 'error');
             alert('Deploy failed: ' + err.message);
         } finally {
             saveBtn.disabled = false;
-            saveBtn.innerText = 'ðŸš€ Save & Deploy About Profile';
+            saveBtn.innerText = 'SAVE & DEPLOY ABOUT PROFILE';
         }
     });
 
