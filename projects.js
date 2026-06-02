@@ -1,21 +1,5 @@
 const initialProjects = [
     {
-        "id": 1,
-        "title": "Industrial Robotic Arm",
-        "category": "Mechanical Design",
-        "description": "A 6-axis robotic arm designed for precision assembly lines. This project involved complex kinematics, stress analysis of the joints, and integration of high-torque servo motors. Optimized for a 15kg payload with minimal deflection.",
-        "images": [
-            "assets/projects/robotic-arm-1.png",
-            "assets/projects/robotic-arm-2.png",
-            "assets/projects/robotic-arm-3.png"
-        ],
-        "tags": [
-            "SolidWorks",
-            "FEA",
-            "Robotics"
-        ]
-    },
-    {
         "id": 1780373717034,
         "title": "Minimalist LED Acrylic Pendant Enclosure Design",
         "category": "Product Design ",
