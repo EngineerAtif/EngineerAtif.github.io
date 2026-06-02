@@ -22,15 +22,14 @@ const initialProjects = [
 ];
 
 // Auto-deployed from Admin Dashboard
-// Images stored at assets/projects/ and assets/about/
 
 let projects = initialProjects;
 
 const initialAboutData = {
     "subtitle": "About Atif",
-    "title": "The Engineer Behind \nthe Brand",
+    "title": "The Engineer Behind the Brand",
     "desc": "Based in Lahore, Pakistan, Atif Engineering Solutions brings professional corporate rigor to the freelance world. With 6 years of experience and 100+ projects delivered worldwide, we specialize in high-stakes mechanical engineering.\n\nOur services span from initial CAD design to advanced simulations (CFD/FEA) and manufacturing drawings for injection molding and 3D printing.",
-    "image": ""
+    "image": "assets/about/about-profile.png"
 };
 
 let aboutData = initialAboutData;
