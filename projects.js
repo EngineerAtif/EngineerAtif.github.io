@@ -31,21 +31,6 @@ const initialProjects = [
         ]
     },
     {
-        "id": 3,
-        "title": "Electric Vehicle Transmission",
-        "category": "Automotive",
-        "description": "A compact single-speed reduction gearbox for a mid-size EV. The design focused on thermal management of the lubricant and noise/vibration/harshness (NVH) reduction through precision gear tooth profiling.",
-        "images": [
-            "assets/projects/ev-transmission-1.png",
-            "assets/projects/ev-transmission-2.png"
-        ],
-        "tags": [
-            "Gear Design",
-            "Thermal Analysis",
-            "EV"
-        ]
-    },
-    {
         "id": 1780373717034,
         "title": "Minimalist LED Acrylic Pendant Enclosure Design",
         "category": "Product Design ",
