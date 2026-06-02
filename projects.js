@@ -16,21 +16,6 @@ const initialProjects = [
         ]
     },
     {
-        "id": 2,
-        "title": "Medical Device Housing",
-        "category": "Injection Molding",
-        "description": "Designed for high-volume injection molding, this housing for a portable medical scanner required strict adherence to ISO 13485 standards. Included complex draft angles, ribbing for structural integrity, and snap-fit assemblies.",
-        "images": [
-            "assets/projects/medical-housing-1.png",
-            "assets/projects/medical-housing-2.png"
-        ],
-        "tags": [
-            "Injection Molding",
-            "Medical",
-            "DFM"
-        ]
-    },
-    {
         "id": 1780373717034,
         "title": "Minimalist LED Acrylic Pendant Enclosure Design",
         "category": "Product Design ",
