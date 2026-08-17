@@ -76,6 +76,27 @@ const initialProjects = [
             "Thread Design"
         ],
         "videoUrl": ""
+    },
+    {
+        "id": 1786971704474,
+        "title": "IoT Smart Pill Dispenser",
+        "category": "Product Design & Electronic Enclosures",
+        "images": [
+            "assets/projects/iot-smart-pill-dispenser-1786971691564-1.webp",
+            "assets/projects/iot-smart-pill-dispenser-1786971694008-2.webp",
+            "assets/projects/iot-smart-pill-dispenser-1786971696231-3.webp",
+            "assets/projects/iot-smart-pill-dispenser-1786971698269-4.webp",
+            "assets/projects/iot-smart-pill-dispenser-1786971701145-5.webp"
+        ],
+        "description": "Engineered the mechanical architecture and functional enclosure for a Wi-Fi-enabled Smart Pill Dispenser designed to enhance complex medication management. The core mechanical challenge involved integrating a precision weight scale (load cell) into the housing to guarantee highly accurate, real-time dosage measurements.\n\nThe product design features seamless internal mounting for wireless connectivity hardware and custom light guides for LED arrays, providing users with clear visual feedback on pill counts and system status. Developed using advanced parametric CAD software, the final deliverable represents a fully detailed, professional, and manufacturing-ready electronic housing ready for healthcare and pharmacy applications.",
+        "tags": [
+            "CAD",
+            "IoT",
+            "Hardware Integration",
+            "SolidWorks",
+            "Smart Device"
+        ],
+        "videoUrl": ""
     }
 ];
 
