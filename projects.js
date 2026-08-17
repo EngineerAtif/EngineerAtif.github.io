@@ -134,6 +134,26 @@ const initialProjects = [
             "Light-weighting"
         ],
         "videoUrl": ""
+    },
+    {
+        "id": 1786974103171,
+        "title": "Commercial Concession Packaging Suite",
+        "category": "Product Design & 3D Rendering",
+        "images": [
+            "assets/projects/commercial-concession-packaging-suite-1786974079530-1.png",
+            "assets/projects/commercial-concession-packaging-suite-1786974084082-2.png",
+            "assets/projects/commercial-concession-packaging-suite-1786974089267-3.png",
+            "assets/projects/commercial-concession-packaging-suite-1786974096212-4.png"
+        ],
+        "description": "Engineered and visualized a comprehensive suite of commercial concession packaging, including modular food trays, popcorn containers, and various beverage cups. The development cycle began with extensive market research to analyze existing product ergonomics, material constraints, and functional features. Initial hand-sketched concepts were evaluated and iteratively refined to establish optimal dimensions and user-friendly handling.\n\nFollowing the conceptual phase, precise technical drawings were generated to define strict manufacturing parameters and material specifications. The finalized designs were then translated into accurate 3D parametric models using SolidWorks. To complete the presentation, the assemblies were imported into KeyShot, where photorealistic textures, dynamic studio lighting, and varied brand identities—ranging from modern minimalist themes to classic cinema aesthetics—were applied to visualize the final manufactured products.",
+        "tags": [
+            "SolidWorks",
+            "KeyShot",
+            "Packaging Design",
+            "Product Rendering",
+            "Technical Drawings"
+        ],
+        "videoUrl": ""
     }
 ];
 
