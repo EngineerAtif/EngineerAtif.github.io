@@ -39,6 +39,24 @@ const initialProjects = [
             "Manufacturing"
         ],
         "videoUrl": ""
+    },
+    {
+        "id": 1786970408565,
+        "title": "Multi-Color Rugged Pokémon Deck Box",
+        "category": "Mechanical Design & 3D Printing",
+        "images": [
+            "assets/projects/multi-color-rugged-pok-mon-deck-box-1786970402444-1.png",
+            "assets/projects/multi-color-rugged-pok-mon-deck-box-1786970405999-2.png"
+        ],
+        "description": "Engineered and optimized a rugged, multi-color storage case designed specifically for Pokémon trading cards. The mechanical assembly, including the secure snap-fit latches and structural hinges, was parametrically modeled in SolidWorks. The design features an embedded Pikachu face integrated directly into the lid's geometry.\n\nTo prepare for manufacturing, the CAD was imported into Bambu Studio and configured for a seamless 4-color FDM print using generic PLA. The model was sliced at a 0.20mm layer height with a 0.4mm nozzle, ensuring optimal surface quality and precise mechanical clearances for the moving parts right off the build plate, eliminating the need for post-processing or manual painting.",
+        "tags": [
+            "SolidWorks",
+            "Bambu Studio",
+            "FDM",
+            "Multi-Color Printing",
+            "CAD"
+        ],
+        "videoUrl": ""
     }
 ];
 
