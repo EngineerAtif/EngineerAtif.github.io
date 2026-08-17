@@ -116,6 +116,24 @@ const initialProjects = [
             "Modular Assembly"
         ],
         "videoUrl": ""
+    },
+    {
+        "id": 1786973622097,
+        "title": "Structural FEA of NACA 0012 Airfoil Wing Section",
+        "category": "FEA & Structural Analysis",
+        "images": [
+            "assets/projects/structural-fea-of-naca-0012-airfoil-wing-section-1786973612746-1.png",
+            "assets/projects/structural-fea-of-naca-0012-airfoil-wing-section-1786973617612-2.png"
+        ],
+        "description": "Executed a static structural Finite Element Analysis (FEA) on a lightweight aircraft wing section based on the NACA 0012 airfoil profile. The internal architecture features a multi-rib and spar assembly with engineered lightening holes to optimize the strength-to-weight ratio.The simulation evaluated the structural integrity of the wing under simulated aerodynamic lift loads. Von Mises stress distribution analysis revealed that the peak stresses (3.52 x 10^7 N/m^2) remained well below the material's yield strength ($2.80 \\times 10^8 \\text{ N/m}^2$). The subsequent Factor of Safety (FOS) plot confirmed a minimum FOS of 7.9, validating that the internal rib structure successfully distributes the load while maintaining significant structural redundancy.",
+        "tags": [
+            "SolidWorks Simulation",
+            "FEA",
+            "Aerospace Design",
+            "Stress Analysis",
+            "Light-weighting"
+        ],
+        "videoUrl": ""
     }
 ];
 
