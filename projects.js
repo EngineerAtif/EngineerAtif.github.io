@@ -97,6 +97,25 @@ const initialProjects = [
             "Smart Device"
         ],
         "videoUrl": ""
+    },
+    {
+        "id": 1786972667728,
+        "title": "Custom 3D Printer Architecture & Design",
+        "category": "Machine Design & Product Engineering",
+        "images": [
+            "assets/projects/custom-3d-printer-architecture-design-1786972656211-1.png",
+            "assets/projects/custom-3d-printer-architecture-design-1786972660521-2.png",
+            "assets/projects/custom-3d-printer-architecture-design-1786972663894-3.png"
+        ],
+        "description": "Executed the end-to-end mechanical design and product architecture for a custom 3D printer, balancing aesthetic appeal with high-precision manufacturing feasibility. The development process transitioned from initial conceptual hand-sketches into rigorous 2D technical drawings, establishing strict dimensional specifications, part details, and assembly layouts to ensure seamless component integration.\n\nUsing advanced parametric CAD, the technical data was transformed into a comprehensive 3D digital twin. This detailed model captured the robust structural frame, moving kinematic components, and user interface housing, allowing for extensive virtual testing and refinement. Key design achievements include an ergonomic, compact footprint that minimizes vibration for high-precision extrusion, and a modular architecture strategy to streamline final assembly, routine maintenance, and future hardware upgrades.",
+        "tags": [
+            "CAD",
+            "Machine Design",
+            "2D Technical Drawings",
+            "Prototyping",
+            "Modular Assembly"
+        ],
+        "videoUrl": ""
     }
 ];
 
