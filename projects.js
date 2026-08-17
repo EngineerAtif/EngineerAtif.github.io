@@ -18,6 +18,27 @@ const initialProjects = [
             "Enclosure Design"
         ],
         "videoUrl": ""
+    },
+    {
+        "id": 1786969836460,
+        "title": "Precision CNC Rest Plate",
+        "category": "Mechanical Design",
+        "images": [
+            "assets/projects/precision-cnc-rest-plate-1786969827637-1.png",
+            "assets/projects/precision-cnc-rest-plate-1786969830669-2.png",
+            "assets/projects/precision-cnc-rest-plate-1786969833756-3.png"
+        ],
+        "description": "Developed a comprehensive, manufacturing-ready 2D technical drawing for a custom CNC-machined component used within a heavy-duty press assembly. The primary focus of this project was translating 3D CAD geometry into actionable manufacturing instructions, ensuring perfect alignment for moving sub-assemblies.\n\nKey engineering skills applied include:\n\nApplied strict GD&T frameworks to communicate design intent and ensure proper assembly interfaces.\n\nImplemented True Position controls with Maximum Material Condition (MMC) for linear bearing pockets to prevent guide rod binding.\n\nSpecified Parallelism tolerances to ensure the flush mounting of high-pressure pneumatic cylinders.\n\nStructured primary, secondary, and tertiary datums (A, B, C) to optimize CNC setup and coordinate measurement.\n\nUtilized H7 limit fits for critical dowel pin locations to guarantee repeatable, rigid assembly.",
+        "tags": [
+            "SolidWorks",
+            "CAD",
+            "GD&T",
+            "2D Drafting",
+            "CNC Machining",
+            "Mechanical Engineering",
+            "Manufacturing"
+        ],
+        "videoUrl": ""
     }
 ];
 
