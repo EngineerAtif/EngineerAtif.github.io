@@ -57,6 +57,25 @@ const initialProjects = [
             "CAD"
         ],
         "videoUrl": ""
+    },
+    {
+        "id": 1786971280392,
+        "title": "Custom Tippmann 12 Air Gun Components & Hopper",
+        "category": "Mechanical Design & Prototyping",
+        "images": [
+            "assets/projects/custom-tippmann-12-air-gun-components-hopper-1786971271356-1.png",
+            "assets/projects/custom-tippmann-12-air-gun-components-hopper-1786971274316-2.png",
+            "assets/projects/custom-tippmann-12-air-gun-components-hopper-1786971277495-3.png"
+        ],
+        "description": "Engineered a custom suite of 3D-printable upgrade components for the Tippmann 12 air gun, including a coffin-style ball hopper, a threaded barrel, and a retention barrel nut. Designed parametrically in SolidWorks, the hopper features optimized internal ramp angles for reliable, jam-free gravity feeding alongside integrated hinge mechanics for the lid assembly.\n\nThe barrel and nut assemblies incorporate precision-modeled custom threads with calculated tolerances to compensate for FDM material shrinkage, ensuring a secure physical fit right off the printer. Structural fluting and ergonomic chamfers were applied to the barrel nut to improve manual grip while maximizing strength against radial expansion and hoop stress.",
+        "tags": [
+            "SolidWorks",
+            "3D Printing",
+            "Tactical Gear",
+            "CAD",
+            "Thread Design"
+        ],
+        "videoUrl": ""
     }
 ];
 
