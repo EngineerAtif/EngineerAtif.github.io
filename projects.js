@@ -192,6 +192,23 @@ const initialProjects = [
             "Thermal Simulation"
         ],
         "videoUrl": ""
+    },
+    {
+        "id": 1789243882839,
+        "title": "3D-Printed VR Shotgun Stock for Oculus Quest",
+        "category": "VR Accessories & Product Design",
+        "images": [
+            "assets/projects/3d-printed-vr-shotgun-stock-for-oculus-quest-1789243879963-1.png"
+        ],
+        "description": "Engineered a custom, 3D-printable shotgun stock accessory designed to integrate seamlessly with Oculus Quest VR controllers. Modeled parametrically in SolidWorks, the design features a dedicated docking cradle that securely mounts the controller without obstructing the infrared tracking ring, ensuring zero loss of tracking fidelity during high-intensity virtual reality gameplay.\n\nThe mechanical assembly was designed with user immersion and tactile feedback in mind. It includes a ribbed pump-action forend, a textured ergonomic pistol grip, and a specialized flash hider aesthetic at the barrel tip. The entire assembly was optimized for FDM 3D printing, focusing on structural rigidity and lightweight handling to prevent fatigue during extended VR sessions.",
+        "tags": [
+            "SolidWorks",
+            "3D Printing",
+            "VR Hardware",
+            "Gaming Peripherals",
+            "Ergonomics"
+        ],
+        "videoUrl": ""
     }
 ];
 
