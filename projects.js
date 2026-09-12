@@ -173,6 +173,25 @@ const initialProjects = [
             "Technical Drawings"
         ],
         "videoUrl": ""
+    },
+    {
+        "id": 1789243559354,
+        "title": "CFD Thermal Analysis of Shell & Tube Heat Exchanger",
+        "category": "CFD Analysis & Thermal Engineering",
+        "images": [
+            "assets/projects/cfd-thermal-analysis-of-shell-tube-heat-exchanger-1789243551688-1.jfif",
+            "assets/projects/cfd-thermal-analysis-of-shell-tube-heat-exchanger-1789243554146-2.jfif",
+            "assets/projects/cfd-thermal-analysis-of-shell-tube-heat-exchanger-1789243556751-3.jfif"
+        ],
+        "description": "Conducted a comprehensive Computational Fluid Dynamics (CFD) simulation on a Shell and Tube Heat Exchanger featuring 8 inner tubes. The shell dimensions were defined as 900mm in length and 150mm in diameter. The primary objective of this specific case study was to evaluate the impact of large baffle spacing on flow dead zones and overall heat transfer efficiency. The geometry was prepared in SpaceClaim, utilizing the \"Share Topology\" feature to ensure seamless mesh continuity.\n\nThe simulation physics were configured in ANSYS Fluent with the Energy equation enabled and the viscous model set to k-omega SST. Material properties were assigned using liquid water for the fluid domains and copper for the solid tubes. To accurately capture the conjugate heat transfer, Coupled Wall interfaces were established between the fluid volumes and the solid tube structures. The boundary conditions were strictly defined: a hot inlet flowing at 1.5 m/s at 350 K, a cold inlet flowing at 1.0 m/s at 300 K, and all outlets set to 0 Pa gauge pressure.\n\nThe post-processed velocity plots indicated a maximum velocity peak of 1.77 m/s at the nozzle entry and exit regions. Crucially, the analysis revealed significant flow recirculation and \"dead zones\" directly behind the baffles as a consequence of the large spacing configuration. Furthermore, the resulting temperature and pressure contours verified the expected pressure drop across the shell side and successfully validated the conductive heat transfer from the hot tube-side fluid to the cold shell-side fluid.",
+        "tags": [
+            "ANSYS Fluent",
+            "Heat Transfer",
+            "SpaceClaim",
+            "k-omega SST",
+            "Thermal Simulation"
+        ],
+        "videoUrl": ""
     }
 ];
 
